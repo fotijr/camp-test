@@ -1,0 +1,24 @@
+html{
+    font-family: cursive;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+h1{
+    text-align: center;
+}
+
+img.preloaded{
+    display: none;
+}
+
+canvas{
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 15px solid #000;
+    display: block;
+    box-shadow: grey 1px 1px 20px 11px;
+    margin-top: 50px;
+}
