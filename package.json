@@ -8,16 +8,21 @@
     "start": "webpack-dev-server"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Dominic Foti, Jr",
+  "license": "MIT",
   "devDependencies": {
     "copy-webpack-plugin": "^4.0.1",
     "html-webpack-include-assets-plugin": "0.0.5",
     "html-webpack-plugin": "^2.28.0",
+    "jasmine-core": "^2.6.3",
+    "jshint": "^2.9.4",
+    "jshint-loader": "^0.8.4",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-webpack": "^2.0.3",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
   },
-  "dependencies": {
-    "jshint-loader": "^0.8.4"
-  }
+  "dependencies": {}
 }

@@ -1,19 +1,25 @@
 import app from './app';
 
-function component () {
+function title() {
   var element = document.createElement('h1');
   element.innerHTML = "Camp Test";
   return element;
 }
 
-document.body.appendChild(component());
-
-function campground () {
+function campground() {
   var element = document.createElement('canvas');
-  element.setAttribute("width", "500");
-  element.setAttribute("height", "500");
+  element.setAttribute("width", document.documentElement.clientWidth);
+  element.setAttribute("height", document.documentElement.clientHeight);
   return element;
 }
 
+function prompt(){
+  var element = document.createElement('div');
+  element.classList.add("prompt");
+  return element;
+}
+
+//document.body.appendChild(title());
 var canvas = document.body.appendChild(campground());
+document.body.appendChild(prompt());
 app(canvas);

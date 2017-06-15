@@ -22,8 +22,8 @@ module.exports = {
                             esversion: 6,
                             camelcase: true,
                             browser: true,
-                            undef: true
-                            //unused: true
+                            undef: true,
+                            devel: true
                         }
                     }
                 ]
