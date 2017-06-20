@@ -46,9 +46,16 @@ export default function (canvas) {
     }
 
     function drawCamper(camper) {
-        console.log("Drawing camper", camper.x, camper.y);
+        // console.log("Drawing camper", camper.x, camper.y);
         ctx.fillStyle = camper.color;
-        ctx.fillRect(camper.x, camper.y, camper.size, camper.size);
+        ctx.fillRect(camper.x, camper.y + 5, camper.size, camper.size - 10);
+        ctx.fillRect(camper.x + 5, camper.y, camper.size - 10, camper.size);
+
+        // draw eyes
+        ctx.fillStyle = "white";
+        ctx.fillRect(camper.x + 10, camper.y + 20, camper.size - 40, camper.size - 47);
+        ctx.fillRect(camper.x + 30, camper.y + 20, camper.size - 40, camper.size - 47);
+        ctx.fillRect(camper.x + 17, camper.y + 35, camper.size - 36, camper.size - 48);
     }
 
     function showCamperPrompt(person, activity) {

@@ -10,8 +10,23 @@ describe("The zipline", function () {
     expect(result.success).toBe(true);
   });
 
-  it("does NOT allow riders younger than 16 yrs old", function () {
-    var rider = { age: 15 };
+  it("allows riders under 16 with a waiver", function () {
+    var rider = {
+      age: 15,
+      waivers: {
+        zipline: true
+      }
+    };
+    var zipline = require('./activities.js').default().zipline;
+    var result = zipline.do(rider);
+    expect(result.success).toBe(true);
+  });
+
+  it("does NOT allow riders under 16 without a waiver", function () {
+    var rider = {
+      age: 15,
+      waivers: {}
+    };
     var zipline = require('./activities.js').default().zipline;
     var result = zipline.do(rider);
     expect(result.success).toBe(false);

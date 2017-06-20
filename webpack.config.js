@@ -3,6 +3,14 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
+const webpackOutput = {
+    hash: false,
+    version: false,
+    timings: false,
+    assets: false,
+    chunks: false
+};
+
 module.exports = {
     entry: './src/index.js',
     output: {
@@ -23,7 +31,12 @@ module.exports = {
                             camelcase: true,
                             browser: true,
                             undef: true,
-                            devel: true
+                            devel: true,
+                            globals: {
+                                "describe": true, // prevent jshint warning for jasmine function names
+                                "it": true,
+                                "expect": true
+                            }
                         }
                     }
                 ]
@@ -54,7 +67,9 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
-        port: 9000
+        port: 9000,
+        stats: "errors-only"
+        //stats: webpackOutput
     },
     devtool: "cheap-eval-source-map"
 };

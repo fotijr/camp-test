@@ -6,7 +6,7 @@
  * @param {string} msg 
  * @returns 
  */
-function generateResult(success, msg){
+function generateResult(success, msg) {
     return {
         success: success,
         message: msg
@@ -32,8 +32,8 @@ export default function () {
         height: 71,
         action: "ride the zipline",
         do: function (person) {
-            if (person.age < 16){
-                return generateResult(false, "I'm sorry, you are not old enough to ride the zipline ☹");
+            if (person.age < 16 && !person.waivers.zipline) {
+                return generateResult(false, "I'm sorry, you are not old enough to ride the zipline without a waiver ☹");
             }
             return generateResult(true, "🎈 You enjoyed the zipline! 🎈");
         }
