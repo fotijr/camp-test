@@ -63,11 +63,6 @@ export default function (canvas) {
         if (prompt === null) return;
         var canvasBorder = canvas.getBoundingClientRect();
         prompt.innerHTML = "Press [x] to " + activity.action;
-        var promptBoundary = prompt.getBoundingClientRect();
-        console.log("promptbound", promptBoundary);
-        prompt.style.top = (canvasBorder.top + person.boundaries.bottom + 10) + "px";
-        prompt.style.left = (canvasBorder.left + person.x - (promptBoundary.width / 2)) + "px";
-
         prompt.classList.add("show");
         person.promtShown = true;
     }
