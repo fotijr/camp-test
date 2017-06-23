@@ -10,14 +10,6 @@ export default function (canvas) {
     var campers = People((canvas.width / 2), (canvas.height / 2)).all;
     var camperIndex = 0;
 
-    function initializeActivityImage(activity) {
-        var img = document.createElement('img');
-        img.setAttribute("src", "/img/" + activity.img);
-        img.setAttribute("class", "preloaded");
-        img.setAttribute("width", activity.width);
-        activity.imgElement = document.body.appendChild(img);
-    }
-
     function keydown(e) {
         let pixelsToMove = 25;
         let camper = campers[camperIndex];
@@ -39,10 +31,6 @@ export default function (canvas) {
             return;
         }
         render();
-    }
-
-    function drawActivity(activity) {
-        ctx.drawImage(activity.imgElement, activity.x, activity.y, activity.width, activity.height);
     }
 
     function drawCamper(camper) {
@@ -94,14 +82,16 @@ export default function (canvas) {
 
     function render() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        activities.forEach(drawActivity);
 
         let camper = campers[camperIndex];
         let buffer = 15;
 
         drawCamper(camper);
         var boundaryCrossed = activities.some(function (activity, index) {
-            if ((camper.boundaries.top) < (activity.boundaries.bottom + buffer)) {
+            if (((camper.boundaries.top) < (activity.boundaries.bottom + buffer)) &&
+                ((camper.boundaries.left) < (activity.boundaries.right + buffer)) &&
+                ((camper.boundaries.bottom) > (activity.boundaries.top - buffer)) &&
+                ((camper.boundaries.right) > (activity.boundaries.left - buffer))) {
                 if (!camper.promtShown) {
                     activityIndex = index;
                     showCamperPrompt(camper, activity);
@@ -114,12 +104,18 @@ export default function (canvas) {
         }
     }
 
-    activities.forEach((activity) => {
-        initializeActivityImage(activity);
-    });
+    function renderActivity(activity) {
+        var activityDiv = document.createElement('div');
+        activityDiv.classList.add("activity");
+        activityDiv.style.backgroundImage = "url('/img/" + activity.img + "')";
+        activityDiv.style.width = activity.width + "px";
+        activityDiv.style.height = activity.height + "px";
+        activityDiv.style.top = activity.y + "px";
+        activityDiv.style.left = activity.x + "px";
+        document.body.appendChild(activityDiv);
+    }
 
-    setTimeout(() => {
-        window.addEventListener("keydown", keydown);
-        render();
-    }, 200);
+    activities.forEach(renderActivity);
+    window.addEventListener("keydown", keydown);
+    render();
 }

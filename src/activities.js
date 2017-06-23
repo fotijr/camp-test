@@ -16,7 +16,6 @@ function generateResult(success, msg) {
 export default function () {
     var zipline = {
         img: "zipline.jpg",
-        imgElement: null,
         title: "Zipline",
         x: 35,
         y: 60,
@@ -28,8 +27,8 @@ export default function () {
                 left: this.x
             };
         },
-        width: 100,
-        height: 71,
+        width: 300,
+        height: 213,
         action: "ride the zipline",
         do: function (person) {
             if (person.age < 16 && !person.waivers.zipline) {

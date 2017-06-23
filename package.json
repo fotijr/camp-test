@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "test": "karma start --single-run --browsers Firefox"
   },
   "keywords": [],
   "author": "Dominic Foti, Jr",
@@ -20,9 +21,12 @@
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
     "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-webpack": "^2.0.3",
-    "webpack": "^2.6.1",
+    "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
   },
-  "dependencies": {}
+  "dependencies": {
+    "karma-firefox-launcher": "^1.0.1"
+  }
 }
