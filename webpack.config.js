@@ -1,7 +1,5 @@
 var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 const webpackOutput = {
     hash: false,
@@ -45,24 +43,10 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([
-            { from: './src/main.css', to: 'main.css' },
+            { from: './src/index.html' },
+            { from: './src/main.css' },
             { from: './src/img', to: 'img' }
-        ]),
-        new HtmlWebpackPlugin({
-            title: 'Camp Test',
-            files: {
-                css: ["main.css"],
-                chunks: {
-                    "head": {
-                        "css": ["main.css"]
-                    }
-                }
-            }
-        }),
-        new HtmlWebpackIncludeAssetsPlugin({
-            assets: ['main.css'],
-            append: true
-        })
+        ])
     ],
     devServer: {
         contentBase: path.join(__dirname, "dist"),

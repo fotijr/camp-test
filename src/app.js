@@ -106,6 +106,7 @@ export default function (canvas) {
 
     function renderActivity(activity) {
         var activityDiv = document.createElement('div');
+        activityDiv.innerHTML = activity.title;
         activityDiv.classList.add("activity");
         activityDiv.style.backgroundImage = "url('/img/" + activity.img + "')";
         activityDiv.style.width = activity.width + "px";
