@@ -70,14 +70,20 @@ export default function (canvas) {
     }
 
     function doActivity(activity, camper) {
-        var result = activity.do(camper);
-        console.log(result);
-
-        var prompt = getPromptElement();
-        if (prompt === null) return;
-        prompt.innerHTML = result.message;
-        var css = result.success ? "happy" : "sad";
-        prompt.classList.add(css);
+        activity.do(camper)
+            .then(msg => {
+                return {success: true, message: msg};
+            })
+            .catch(msg => {
+                return {success: false, message: msg};
+            })
+            .then(result => {
+                var prompt = getPromptElement();
+                if (prompt === null) return;
+                var css = result.success ? "happy" : "sad";
+                prompt.classList.add(css);
+                prompt.innerHTML = result.message;
+            });
     }
 
     function render() {
