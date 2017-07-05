@@ -49,7 +49,6 @@ export default function (canvas) {
     function showCamperPrompt(person, activity) {
         var prompt = getPromptElement();
         if (prompt === null) return;
-        var canvasBorder = canvas.getBoundingClientRect();
         prompt.innerHTML = "Press [x] to " + activity.action;
         prompt.classList.add("show");
         person.promtShown = true;
@@ -72,10 +71,10 @@ export default function (canvas) {
     function doActivity(activity, camper) {
         activity.do(camper)
             .then(msg => {
-                return {success: true, message: msg};
+                return { success: true, message: msg };
             })
             .catch(msg => {
-                return {success: false, message: msg};
+                return { success: false, message: msg };
             })
             .then(result => {
                 var prompt = getPromptElement();
@@ -114,12 +113,17 @@ export default function (canvas) {
         var activityDiv = document.createElement('div');
         activityDiv.innerHTML = activity.title;
         activityDiv.classList.add("activity");
-        activityDiv.style.backgroundImage = "url('/img/" + activity.img + "')";
-        activityDiv.style.width = activity.width + "px";
-        activityDiv.style.height = activity.height + "px";
-        activityDiv.style.top = activity.y + "px";
-        activityDiv.style.left = activity.x + "px";
+        if (activity.style) {
+            let cssText = "";
+            Object.entries(activity.style).forEach(
+                ([cssProp, value]) => cssText += cssProp + ":" + value + ";"
+            );
+            activityDiv.style.cssText = cssText;
+        }
         document.body.appendChild(activityDiv);
+        var rect = activityDiv.getBoundingClientRect();
+        activity.x = rect.left;
+        activity.y = rect.top;
     }
 
     activities.forEach(renderActivity);

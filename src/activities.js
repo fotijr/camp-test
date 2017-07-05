@@ -1,19 +1,23 @@
 export default function () {
     var zipline = {
-        img: "zipline.jpg",
         title: "Zipline",
         x: 35,
         y: 60,
+        style: {
+            top: "10%",
+            left: "10%",
+            width: 300,
+            height: 213,
+            "background-image": "url(/img/zipline.jpg)"
+        },
         get boundaries() {
             return {
                 top: this.y,
-                right: this.x + this.width,
-                bottom: this.y + this.height,
+                right: this.x + this.style.width,
+                bottom: this.y + this.style.height,
                 left: this.x
             };
         },
-        width: 300,
-        height: 213,
         action: "ride the zipline",
         do: function (person) {
             return new Promise((resolve, reject) => {
@@ -26,20 +30,24 @@ export default function () {
     };
 
     var pool = {
-        img: "pool.jpg",
         title: "Pool",
-        x: 850,
-        y: 200,
         get boundaries() {
             return {
                 top: this.y,
-                right: this.x + this.width,
-                bottom: this.y + this.height,
+                right: this.x + this.style.width,
+                bottom: this.y + this.style.height,
                 left: this.x
             };
         },
-        width: 300,
-        height: 213,
+        x: 35,
+        y: 60,
+        style: {
+            top: "10%",
+            right: "10%",
+            width: 300,
+            height: 213,
+            "background-image": "url(/img/pool.jpg)"
+        },
         action: "swim in the pool",
         do: function (person) {
             return new Promise((resolve, reject) => {
