@@ -1,8 +1,8 @@
 export default function () {
     var zipline = {
         title: "Zipline",
-        x: 35,
-        y: 60,
+        x: 0,
+        y: 0,
         style: {
             top: "10%",
             left: "10%",
@@ -39,8 +39,8 @@ export default function () {
                 left: this.x
             };
         },
-        x: 35,
-        y: 60,
+        x: 0,
+        y: 0,
         style: {
             top: "10%",
             right: "10%",
@@ -62,9 +62,38 @@ export default function () {
         }
     };
 
+     var computerLab = {
+        title: "Computer Lab",
+        x: 0,
+        y: 0,
+        style: {
+            bottom: "10%",
+            left: "10%",
+            width: 300,
+            height: 213,
+            "background-image": "url(/img/computer.jpg)"
+        },
+        get boundaries() {
+            return {
+                top: this.y,
+                right: this.x + this.style.width,
+                bottom: this.y + this.style.height,
+                left: this.x
+            };
+        },
+        action: "to check your email",
+        do: function (person) {
+            return new Promise((resolve, reject) => {
+                person.waivers.zipline = true;
+                resolve("🎈 Your parents emailed a zipline waiver! 🎈");
+            });
+        }
+    };
+
     return {
         zipline,
         pool,
-        all: [zipline, pool]
+        computerLab,
+        all: [zipline, pool, computerLab]
     };
 }

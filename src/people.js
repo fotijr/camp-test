@@ -11,7 +11,6 @@ export default function (x, y) {
         x: x ? (x - (camperSize / 2)) : 0,
         y: y ? (y - (camperSize / 2)) : 0,
         size: camperSize,
-        promtShown: false,
         get boundaries() {
             return {
                 top: this.y,

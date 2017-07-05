@@ -3,29 +3,29 @@ import People from './people';
 
 export default function (canvas) {
     const ctx = canvas.getContext('2d');
+    var promptShown = false;
 
     var activities = Activities().all;
-    var activityIndex = -1;
+    var activeActivity;
 
     var campers = People((canvas.width / 2), (canvas.height / 2)).all;
-    var camperIndex = 0;
+    var activeCamper = campers[0];
 
     function keydown(e) {
         let pixelsToMove = 25;
-        let camper = campers[camperIndex];
 
-        if (e.keyCode === 88 && activityIndex >= 0) { // x
-            return doActivity(activities[activityIndex], camper);
+        if (e.keyCode === 88 && activeActivity) { // x
+            return doActivity(activeActivity, activeCamper);
         }
 
         if (e.keyCode === 38) { // up
-            camper.y -= pixelsToMove;
+            activeCamper.y -= pixelsToMove;
         } else if (e.keyCode === 39) { // right
-            camper.x += pixelsToMove;
+            activeCamper.x += pixelsToMove;
         } else if (e.keyCode === 40) { // down
-            camper.y += pixelsToMove;
+            activeCamper.y += pixelsToMove;
         } else if (e.keyCode === 37) { // left
-            camper.x -= pixelsToMove;
+            activeCamper.x -= pixelsToMove;
         } else {
             console.log("Key code:", e.keyCode);
             return;
@@ -51,7 +51,7 @@ export default function (canvas) {
         if (prompt === null) return;
         prompt.innerHTML = "Press [x] to " + activity.action;
         prompt.classList.add("show");
-        person.promtShown = true;
+        promptShown = true;
     }
 
     function getPromptElement() {
@@ -61,11 +61,11 @@ export default function (canvas) {
     }
 
     function hideCamperPrompt(person) {
-        activityIndex = -1;
+        activeActivity = null;
         var prompt = getPromptElement();
         if (prompt === null) return;
         prompt.classList.remove("show", "happy", "sad");
-        person.promtShown = false;
+        promptShown = false;
     }
 
     function doActivity(activity, camper) {
@@ -87,25 +87,23 @@ export default function (canvas) {
 
     function render() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        let camper = campers[camperIndex];
         let buffer = 15;
 
-        drawCamper(camper);
+        drawCamper(activeCamper);
         var boundaryCrossed = activities.some(function (activity, index) {
-            if (((camper.boundaries.top) < (activity.boundaries.bottom + buffer)) &&
-                ((camper.boundaries.left) < (activity.boundaries.right + buffer)) &&
-                ((camper.boundaries.bottom) > (activity.boundaries.top - buffer)) &&
-                ((camper.boundaries.right) > (activity.boundaries.left - buffer))) {
-                if (!camper.promtShown) {
-                    activityIndex = index;
-                    showCamperPrompt(camper, activity);
+            if (((activeCamper.boundaries.top) < (activity.boundaries.bottom + buffer)) &&
+                ((activeCamper.boundaries.left) < (activity.boundaries.right + buffer)) &&
+                ((activeCamper.boundaries.bottom) > (activity.boundaries.top - buffer)) &&
+                ((activeCamper.boundaries.right) > (activity.boundaries.left - buffer))) {
+                if (activeActivity !== activity) {
+                    activeActivity = activity;
+                    showCamperPrompt(activeCamper, activeActivity);
                 }
                 return true;
             }
         });
-        if (!boundaryCrossed && camper.promtShown) {
-            hideCamperPrompt(camper);
+        if (!boundaryCrossed && promptShown) {
+            hideCamperPrompt(activeCamper);
         }
     }
 
