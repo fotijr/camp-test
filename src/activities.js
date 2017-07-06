@@ -1,4 +1,20 @@
 export default function () {
+    function getResource(url) {
+        return new Promise(function (resolve, reject) {
+            let req = new XMLHttpRequest();
+            req.open("GET", url);
+            req.onload = () => {
+                if (req.status === 200) {
+                    resolve(JSON.parse(req.response));
+                } else {
+                    reject(new Error(req.statusText));
+                }
+            };
+            req.onerror = () => reject(new Error("Network error"));
+            req.send();
+        });
+    }
+
     var zipline = {
         title: "Zipline",
         x: 0,
@@ -62,7 +78,7 @@ export default function () {
         }
     };
 
-     var computerLab = {
+    var computerLab = {
         title: "Computer Lab",
         x: 0,
         y: 0,
@@ -84,8 +100,13 @@ export default function () {
         action: "to check your email",
         do: function (person) {
             return new Promise((resolve, reject) => {
-                person.waivers.zipline = true;
-                resolve("🎈 Your parents emailed a zipline waiver! 🎈");
+                getResource("/api/waiver.json")
+                    .then(waiver => {
+                        if (!waiver.signed) reject("I'm sorry, your parents sent the waiver but it wasn't signed ☹");
+                        person.waivers.zipline = true;
+                        resolve("🎈 Your parents emailed a zipline waiver! 🎈");
+                    })
+                    .catch(() => reject("I'm sorry, you weren't able to check your email ☹"));
             });
         }
     };
