@@ -9,7 +9,7 @@ before_script:
   - webpack start 
   - sleep 3 # give Web server some time to bind to sockets, etc
 script:
-  - nightwatch --env chrome
+  - nightwatch --env "ci"
 addons:
   firefox: "latest"
   sauce_connect:
