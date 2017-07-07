@@ -28,6 +28,7 @@ module.exports = {
       }
     },
     "ci": {
+      "default_path_prefix": "/wd/hub",
       "launch_url": "http://ondemand.saucelabs.com:80",
       "desiredCapabilities": {
         "build": `build-${travisJob}`,
@@ -35,7 +36,8 @@ module.exports = {
       }
     },
     "localToSauce": {
-      "launch_url": "http://localhost",
+      "default_path_prefix": "/wd/hub",
+      "launch_url": "http://localhost:9000/",
       "selenium_port": 80,
       "selenium_host": "ondemand.saucelabs.com",
       "username": "FotiJr",
