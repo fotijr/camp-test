@@ -9,7 +9,7 @@ before_script:
   - npm run start --display-error-details &
   - sleep 3
 script:
-  - nightwatch --env "ci"
+  - nightwatch --env "ci" --verbose
 addons:
   firefox: "latest"
   sauce_connect:
