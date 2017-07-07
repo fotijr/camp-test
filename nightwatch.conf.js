@@ -29,15 +29,19 @@ module.exports = {
     },
     "ci": {
       "default_path_prefix": "/wd/hub",
-      "launch_url": "http://ondemand.saucelabs.com:80",
+      "selenium_port": 80,
+      "selenium_host": "ondemand.saucelabs.com",
+      "username": "FotiJr",
+      "access_key": "7f2e3b7f-d3ef-4e7d-88e8-369e306d3e07",
       "desiredCapabilities": {
+        "javascriptEnabled": true,
+        "browserName": "chrome",
         "build": `build-${travisJob}`,
         "tunnel-identifier": travisJob,
       }
     },
     "localToSauce": {
       "default_path_prefix": "/wd/hub",
-      "launch_url": "http://localhost:9000/",
       "selenium_port": 80,
       "selenium_host": "ondemand.saucelabs.com",
       "username": "FotiJr",
