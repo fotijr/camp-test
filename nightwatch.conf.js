@@ -1,5 +1,5 @@
 // if not running in travis env, set to empty string to avoid not defined error
-var travisJob = (typeof TRAVIS_JOB_NUMBER !== "undefined") ? TRAVIS_JOB_NUMBER : "";
+var travisJob = process.env.TRAVIS_JOB_NUMBER || "";
 
 module.exports = {
   "src_folders": [
@@ -41,8 +41,8 @@ module.exports = {
       "username": "FotiJr",
       "access_key": "7f2e3b7f-d3ef-4e7d-88e8-369e306d3e07",
       "desiredCapabilities": {
-          "javascriptEnabled": true,
-          "browserName": "chrome"
+        "javascriptEnabled": true,
+        "browserName": "chrome"
       }
     }
   }
