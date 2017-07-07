@@ -5,5 +5,13 @@ cache: yarn
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - webpack start 
+  - sleep 3 # give Web server some time to bind to sockets, etc
+script:
+  - nightwatch --env chrome
 addons:
   firefox: "latest"
+  sauce_connect:
+    username: "FotiJr"
+    access_key: "7f2e3b7f-d3ef-4e7d-88e8-369e306d3e07"    
