@@ -6,10 +6,10 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 3
-  - npm run start --display-error-details &
+  - npm run start &
   - sleep 3
 script:
-  - nightwatch --env "ci" --verbose
+  - nightwatch --env ci
 addons:
   firefox: "latest"
   sauce_connect:

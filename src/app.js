@@ -4,6 +4,7 @@ import People from './people';
 export default function (canvas) {
     const ctx = canvas.getContext('2d');
     var promptShown = false;
+    var canvasArtifacts = [];
 
     var activities = Activities().all;
     var activeActivity;
@@ -46,10 +47,10 @@ export default function (canvas) {
         ctx.fillRect(camper.x + 17, camper.y + 35, camper.size - 36, camper.size - 48);
     }
 
-    function showCamperPrompt(person, activity) {
+    function showPrompt(message) {
         var prompt = getPromptElement();
         if (prompt === null) return;
-        prompt.innerHTML = "Press [x] to " + activity.action;
+        prompt.innerHTML = message;
         prompt.classList.add("show");
         promptShown = true;
     }
@@ -87,8 +88,9 @@ export default function (canvas) {
 
     function render() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        let buffer = 15;
+        drawCampground();
 
+        var buffer = 15;
         drawCamper(activeCamper);
         var boundaryCrossed = activities.some(function (activity, index) {
             if (((activeCamper.boundaries.top) < (activity.boundaries.bottom + buffer)) &&
@@ -97,7 +99,7 @@ export default function (canvas) {
                 ((activeCamper.boundaries.right) > (activity.boundaries.left - buffer))) {
                 if (activeActivity !== activity) {
                     activeActivity = activity;
-                    showCamperPrompt(activeCamper, activeActivity);
+                    showPrompt("Press [x] to " + activeActivity.action);
                 }
                 return true;
             }
@@ -106,6 +108,46 @@ export default function (canvas) {
             hideCamperPrompt(activeCamper);
         }
     }
+
+    function drawCampground() {
+        canvasArtifacts.forEach(function (colorGroup) {
+            ctx.fillStyle = colorGroup.color;
+            colorGroup.blobs.forEach(function (blob) {
+                ctx.fillRect(blob.x, blob.y, blob.width, blob.height);
+            });
+        });
+    }
+
+    function generateMap() {
+        // bland green grass background
+        canvasArtifacts.push({
+            color: "#71CE48",
+            blobs: [{
+                x: 0,
+                y: 0,
+                width: canvas.width,
+                height: canvas.height
+            }]
+        });
+
+        // darker green grass patches
+        var patchSize = 5;
+        var grassPatches = { color: "#285813", blobs: [] };
+        for (let i = 0; i < 200; i++) {
+            let xFactor = Math.random(),
+                yFactor = Math.random(),
+                x = (canvas.width * xFactor),
+                y = (canvas.height * yFactor);
+            grassPatches.blobs.push({
+                x,
+                y,
+                width: patchSize,
+                height: patchSize
+            });
+        }
+        canvasArtifacts.push(grassPatches);
+    }
+
 
     function renderActivity(activity) {
         var activityDiv = document.createElement('div');
@@ -126,5 +168,7 @@ export default function (canvas) {
 
     activities.forEach(renderActivity);
     window.addEventListener("keydown", keydown);
+    generateMap();
     render();
+    showPrompt("Welcome to Camp Test! Use the arrow keys to move.");
 }

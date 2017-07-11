@@ -95,13 +95,16 @@ describe("Using the computer lab", function () {
 
   describe("to check for emailed waivers", function () {
 
-    it("will call the waiver API", function (done) {
-      var camper = { waivers: {} },
+    it("will call the waiver API and add waiver to camper", function (done) {
+      var camper = zipline = require('./people.js').default().nia,
         computerLab = require('./activities.js').default().computerLab;
+
+      spyOn(camper, "addWaiver");
 
       computerLab.do(camper)
         .then(() => {
           expect(jasmine.Ajax.requests.mostRecent().url).toBe("/api/waiver.json");
+          expect(camper.addWaiver).toHaveBeenCalled();
           done();
         })
         .catch(() => done.fail("Error fetching waivers"));

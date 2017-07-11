@@ -16,6 +16,9 @@ div.activity{
     position: absolute;
     background-size:cover;
     background-repeat: no-repeat;
+    color: #fff;
+    font-size: 18px;
+    padding: 5px;
 }
 
 canvas{
@@ -27,9 +30,9 @@ div.prompt{
     font-size: 20px;
     visibility: hidden;
     box-shadow: 1px 1px 8px;
-    background-color: rgba(1, 88, 127, 0.16);
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 20px 8px;
-    border-radius: 3px;
+    border-radius: 3px 3px 0 0;
     z-index: 2;
     bottom: 0;
     position: absolute;

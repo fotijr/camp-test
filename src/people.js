@@ -1,10 +1,16 @@
 const camperSize = 50;
 
+function addWaiver(waiver) {
+    debugger;
+    this.waivers[waiver] = true;
+}
+
 export default function (x, y) {
     var nia = {
         name: "Nia",
         color: "#774938",
         age: 14,
+        addWaiver: addWaiver,
         waivers: {
             //zipline: true
         },

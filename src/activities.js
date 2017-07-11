@@ -103,7 +103,7 @@ export default function () {
                 getResource("/api/waiver.json")
                     .then(waiver => {
                         if (!waiver.signed) reject("I'm sorry, your parents sent the waiver but it wasn't signed ☹");
-                        person.waivers.zipline = true;
+                        person.addWaiver("zipline");
                         resolve("🎈 Your parents emailed a zipline waiver! 🎈");
                     })
                     .catch(() => reject("I'm sorry, you weren't able to check your email ☹"));
