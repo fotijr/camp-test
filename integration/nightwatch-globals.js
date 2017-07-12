@@ -1,4 +1,6 @@
 var chromedriver = require('chromedriver');
+const sauceLabReporter = require('./sauce-lab-reporter');
+
 module.exports = {
   before: function (done) {
     chromedriver.start();
@@ -8,5 +10,7 @@ module.exports = {
   after: function (done) {
     chromedriver.stop();
     done();
-  }
+  },
+
+  tearDown: sauceLabReporter
 };  
