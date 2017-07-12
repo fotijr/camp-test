@@ -1,7 +1,6 @@
 const camperSize = 50;
 
 function addWaiver(waiver) {
-    debugger;
     this.waivers[waiver] = true;
 }
 

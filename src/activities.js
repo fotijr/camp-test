@@ -102,6 +102,7 @@ export default function () {
             return new Promise((resolve, reject) => {
                 getResource("/api/waiver.json")
                     .then(waiver => {
+                        // TODO: is this error changed by the catch?
                         if (!waiver.signed) reject("I'm sorry, your parents sent the waiver but it wasn't signed ☹");
                         person.addWaiver("zipline");
                         resolve("🎈 Your parents emailed a zipline waiver! 🎈");

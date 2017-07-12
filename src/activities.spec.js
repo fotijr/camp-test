@@ -7,12 +7,7 @@ describe("The zipline", function () {
 
     zipline.do(rider)
       .then(done)
-      .catch(() => done.fail("Do failed"));
-
-    rider.age = 99;
-    zipline.do(rider)
-      .then(done)
-      .catch(() => done.fail("Do failed"));
+      .catch(() => done.fail("Zipline Do function failed"));
   });
 
   it("allows riders under 16 with a waiver", function (done) {
@@ -33,7 +28,7 @@ describe("The zipline", function () {
     };
     var zipline = require('./activities.js').default().zipline;
     zipline.do(rider)
-      .then(() => done.fail("Do succeeded"))
+      .then(() => done.fail("Zipline do succeeded when it should have failed"))
       .catch(done);
   });
 });
@@ -67,7 +62,7 @@ describe("The pool", function () {
     mockTime.setHours(6, 59, 0, 0);
     jasmine.clock().mockDate(mockTime);
     pool.do(swimmer)
-      .then(() => done.fail("Do succeeded"))
+      .then(() => done.fail("Pool do function succeeded when it should have failed"))
       .catch(done);
   });
 

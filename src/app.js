@@ -13,7 +13,7 @@ export default function (canvas) {
     var activeCamper = campers[0];
 
     function keydown(e) {
-        let pixelsToMove = 25;
+        let pixelsToMove = 55;
 
         if (e.keyCode === 88 && activeActivity) { // x
             return doActivity(activeActivity, activeCamper);
@@ -35,7 +35,6 @@ export default function (canvas) {
     }
 
     function drawCamper(camper) {
-        // console.log("Drawing camper", camper.x, camper.y);
         ctx.fillStyle = camper.color;
         ctx.fillRect(camper.x, camper.y + 5, camper.size, camper.size - 10);
         ctx.fillRect(camper.x + 5, camper.y, camper.size - 10, camper.size);
@@ -90,8 +89,7 @@ export default function (canvas) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawCampground();
 
-        var buffer = 15;
-        drawCamper(activeCamper);
+        var buffer = 25;
         var boundaryCrossed = activities.some(function (activity, index) {
             if (((activeCamper.boundaries.top) < (activity.boundaries.bottom + buffer)) &&
                 ((activeCamper.boundaries.left) < (activity.boundaries.right + buffer)) &&
@@ -104,6 +102,7 @@ export default function (canvas) {
                 return true;
             }
         });
+        drawCamper(activeCamper);
         if (!boundaryCrossed && promptShown) {
             hideCamperPrompt(activeCamper);
         }
@@ -131,9 +130,10 @@ export default function (canvas) {
         });
 
         // darker green grass patches
-        var patchSize = 5;
+        var patchWidth = 15;
+        var patchSize = 10;
         var grassPatches = { color: "#285813", blobs: [] };
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 40; i++) {
             let xFactor = Math.random(),
                 yFactor = Math.random(),
                 x = (canvas.width * xFactor),
@@ -141,7 +141,25 @@ export default function (canvas) {
             grassPatches.blobs.push({
                 x,
                 y,
-                width: patchSize,
+                width: patchWidth,
+                height: patchSize - 5
+            });
+            grassPatches.blobs.push({
+                x,
+                y: y - 5,
+                width: 3,
+                height: patchSize
+            });
+            grassPatches.blobs.push({
+                x: x + 7,
+                y: y - 5,
+                width: 3,
+                height: patchSize
+            });
+            grassPatches.blobs.push({
+                x: x + patchWidth,
+                y: y - 5,
+                width: 3,
                 height: patchSize
             });
         }

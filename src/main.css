@@ -13,11 +13,13 @@ h1{
 }
 
 div.activity{
+    border: rgb(165, 42, 42) 5px solid;
+    box-shadow: 1px 0px 40px 8px rgba(165, 42, 42, 0.5);
     position: absolute;
     background-size:cover;
     background-repeat: no-repeat;
     color: #fff;
-    font-size: 18px;
+    font-size: 20px;
     padding: 5px;
 }
 
@@ -27,11 +29,11 @@ canvas{
 
 div.prompt{
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 32px;
     visibility: hidden;
     box-shadow: 1px 1px 8px;
-    background-color: rgba(255, 255, 255, 0.6);
-    padding: 20px 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px 8px;
     border-radius: 3px 3px 0 0;
     z-index: 2;
     bottom: 0;
