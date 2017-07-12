@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server",
-    "test": "karma start --single-run --browsers Firefox",
+    "test": "karma start --single-run --browsers Firefox --reporters dots",
     "integration": "node ./src/integration/app.integration.js"
   },
   "keywords": [],
