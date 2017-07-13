@@ -17,16 +17,13 @@ module.exports = function sauceLabReporter(callback) {
   }
 
   if (!username || !accessKey || !sessionId) {
-    console.log(this.client);
     console.log('No username, accessKey or sessionId');
     return callback();
   }
 
   const passed = currentTest.results.passed === currentTest.results.tests;
-  const jobRename = "Job Renamed";
   const data = JSON.stringify({
     passed,
-
     // rename the Sauce Labs job name to the test name
     name: currentTest.name
   });
@@ -35,9 +32,9 @@ module.exports = function sauceLabReporter(callback) {
 
   function responseCallback(res) {
     res.setEncoding('utf8');
-    console.log('Response: ', res.statusCode, JSON.stringify(res.headers));
+    // console.log('Response: ', res.statusCode, JSON.stringify(res.headers));
     res.on('data', function onData(chunk) {
-      console.log('BODY: ' + chunk);
+      // console.log('BODY: ' + chunk);
     });
     res.on('end', function onEnd() {
       console.info('Finished updating saucelabs');
