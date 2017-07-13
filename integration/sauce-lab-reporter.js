@@ -8,6 +8,9 @@ module.exports = function sauceLabReporter(callback) {
   const sessionId = this.client.capabilities['webdriver.remote.sessionid'];
   const accessKey = this.client.options.accessKey;
 
+  //console.log("currentTest");
+  //console.log(currentTest);
+
   if (!this.client.launch_url.match(/saucelabs/)) {
     console.log('Not saucelabs ...');
     return callback();
@@ -20,9 +23,12 @@ module.exports = function sauceLabReporter(callback) {
   }
 
   const passed = currentTest.results.passed === currentTest.results.tests;
-
+  const jobRename = "Job Renamed";
   const data = JSON.stringify({
     passed,
+
+    // rename the Sauce Labs job name to the test name
+    name: currentTest.name
   });
 
   const requestPath = `/rest/v1/${username}/jobs/${sessionId}`;

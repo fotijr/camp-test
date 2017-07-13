@@ -15,6 +15,7 @@ module.exports = {
   },
   "test_settings": {
     "default": {
+      "launch_url": "http://ondemand.saucelabs.com",
       "exclude": "*nightwatch-globals.js",
       "selenium_port": 9515,
       "selenium_host": "localhost",
@@ -28,6 +29,7 @@ module.exports = {
       }
     },
     "ci": {
+      "launch_url": "http://ondemand.saucelabs.com",
       "default_path_prefix": "/wd/hub",
       "selenium_port": 80,
       "selenium_host": "ondemand.saucelabs.com",
@@ -41,6 +43,7 @@ module.exports = {
       }
     },
     "localToSauce": {
+      "launch_url": "http://ondemand.saucelabs.com",
       "default_path_prefix": "/wd/hub",
       "selenium_port": 80,
       "selenium_host": "ondemand.saucelabs.com",

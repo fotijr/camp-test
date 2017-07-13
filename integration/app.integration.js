@@ -1,3 +1,5 @@
+const sauceLabReporter = require('./sauce-lab-reporter');
+
 module.exports = {
     "Verify campground is visible": function (browser) {
         browser
@@ -13,9 +15,11 @@ module.exports = {
             .url("http://localhost:9000")
             .waitForElementVisible("canvas", 1000);
 
-            browser.expect.element('div.prompt').to.be.visible;
-            browser.keys(browser.Keys.DOWN_ARROW);
-            browser.expect.element('div.prompt').to.not.be.visible;
-            browser.end();
-    }
+        browser.expect.element('div.prompt').to.be.visible;
+        browser.keys(browser.Keys.DOWN_ARROW);
+        browser.expect.element('div.prompt').to.not.be.visible;
+        browser.end();
+    },
+
+    tearDown: sauceLabReporter
 };
