@@ -10,11 +10,20 @@ module.exports = function (config) {
     exclude: [
     ],
     preprocessors: {
-      'src/*.js': ['webpack']
+      'src/*.js': ["webpack", "coverage"]
     },
-    reporters: ['progress'],
-    //webpack: webpackConfig,
-    webpack: {stats: "errors-only"},
+    reporters: ["progress", "coverage"],
+    webpackMiddleware: webpackConfig.devServer,
+    //webpackMiddleware: {stats: "errors-only"},
+
+    coverageReporter: {
+      reporters: [
+        // generates ./coverage/lcov.info
+        { type: 'lcovonly', subdir: '.' },
+        // generates ./coverage/coverage-final.json
+        { type: 'json', subdir: '.' },
+      ]
+    },
 
     // web server port
     port: 9876,

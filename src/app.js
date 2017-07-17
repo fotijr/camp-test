@@ -31,7 +31,7 @@ export default function (canvas) {
             console.log("Key code:", e.keyCode);
             return;
         }
-        render();
+        render(e.keyCode);
     }
 
     function drawCamper(camper) {
@@ -85,7 +85,7 @@ export default function (canvas) {
             });
     }
 
-    function render() {
+    function render(keyCode) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawCampground();
 
@@ -99,12 +99,61 @@ export default function (canvas) {
                     activeActivity = activity;
                     showPrompt("Press [x] to " + activeActivity.action);
                 }
+                preventCamperFromPassingActivityBuffer(activeCamper, activity, keyCode);
                 return true;
             }
         });
+        keepCamperOnGrounds(activeCamper);
         drawCamper(activeCamper);
         if (!boundaryCrossed && promptShown) {
             hideCamperPrompt(activeCamper);
+        }
+    }
+
+    // keep camper on edge of activity
+    function preventCamperFromPassingActivityBuffer(camper, activity, keyCode) {
+        var minBuffer = 5,
+            axis, adjustment;
+
+        var insideBoundary = (((camper.boundaries.top) < (activity.boundaries.bottom + 0)) &&
+            ((camper.boundaries.left) < (activity.boundaries.right + 0)) &&
+            ((camper.boundaries.bottom) > (activity.boundaries.top - 0)) &&
+            ((camper.boundaries.right) > (activity.boundaries.left - 0)));
+
+        // if camper not inside activity boundaries, then they're just in buffer zone which is OK
+        if (!insideBoundary) return;
+
+        if (keyCode === 38) { // up
+            axis = "y";
+            adjustment = (activity.boundaries.bottom - camper.boundaries.top + minBuffer);
+        } else if (keyCode === 39) { // right
+            axis = "x";
+            adjustment = (camper.boundaries.right - activity.boundaries.left + minBuffer) * -1;
+        } else if (keyCode === 40) { // down
+            axis = "y";
+            adjustment = (camper.boundaries.bottom - activity.boundaries.top + minBuffer) * -1;
+        } else if (keyCode === 37) { // left
+            axis = "x";
+            adjustment = (activity.boundaries.right - camper.boundaries.left + minBuffer);
+        } else {
+            return;
+        }
+        camper[axis] += adjustment;
+    }
+
+    function keepCamperOnGrounds(camper) {
+        var camperBounds = camper.boundaries;
+        if (camperBounds.left < 0) {
+            camper.x = 0;
+        } else if (camperBounds.top < 0) {
+            camper.y = 0;
+        } else {
+            var canvasBounds = canvas.getBoundingClientRect();
+            if (camperBounds.bottom > canvasBounds.bottom) {
+                camper.y = (canvasBounds.bottom - camper.size);
+            } else if (camperBounds.right > canvasBounds.right) {
+                camper.x = (canvasBounds.right - camper.size);
+            }
         }
     }
 
