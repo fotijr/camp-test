@@ -9,7 +9,7 @@ before_script:
   - npm run start &
   - sleep 3
 script:
-  - npm test
+  - npm test-ci
   - nightwatch --env ci
 addons:
   firefox: "latest"
