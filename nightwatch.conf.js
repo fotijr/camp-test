@@ -16,7 +16,7 @@ module.exports = {
   "test_settings": {
     "default": {
       "launch_url": "http://ondemand.saucelabs.com",
-      "exclude": "*nightwatch-globals.js",
+      "filter": "*.integration.js",
       "selenium_port": 9515,
       "selenium_host": "localhost",
       "default_path_prefix": "",
