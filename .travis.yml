@@ -11,6 +11,8 @@ before_script:
 script:
   - npm run test-ci
   - nightwatch --env ci
+  - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+  - codecov
 addons:
   firefox: "latest"
   sauce_connect:
