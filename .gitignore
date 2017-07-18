@@ -2,3 +2,4 @@ node_modules/
 dist/
 reports/*.xml
 npm-debug.log
+coverage
