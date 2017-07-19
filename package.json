@@ -9,6 +9,8 @@
     "test": "karma start --single-run",
     "test-ci": "karma start --single-run --browsers Firefox --reporters dots",
     "integration": "node ./src/integration/app.integration.js",
+    "e2e": "wdio integration/wdio.local.conf.js",
+    "e2e-ci": "wdio integration/wdio.ci.conf.js",
     "report-coverage": "codecov"
   },
   "keywords": [],

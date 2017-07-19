@@ -3,3 +3,4 @@ dist/
 reports/*.xml
 npm-debug.log
 coverage
+errorShots

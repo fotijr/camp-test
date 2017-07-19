@@ -42,7 +42,6 @@ describe("The pool", function () {
     mockTime.setHours(7, 0, 0, 0);
     jasmine.clock().mockDate(mockTime);
     pool.do(swimmer)
-      .then()
       .catch(() => done.fail("Do failed"))
       .then(() => {
         mockTime.setHours(18, 59, 0, 0);

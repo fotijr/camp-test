@@ -31,7 +31,17 @@ export default function (canvas) {
             console.log("Key code:", e.keyCode);
             return;
         }
+        animateCamper(activeCamper);
         render(e.keyCode);
+    }
+
+    function animateCamper(camper) {
+        window.clearTimeout(camper.animationComplete);
+        camper.moving = true;
+        camper.animationComplete = window.setTimeout(() => {
+            camper.moving = false;
+            render();
+        }, 400);
     }
 
     function drawCamper(camper) {
@@ -39,11 +49,25 @@ export default function (canvas) {
         ctx.fillRect(camper.x, camper.y + 5, camper.size, camper.size - 10);
         ctx.fillRect(camper.x + 5, camper.y, camper.size - 10, camper.size);
 
-        // draw eyes
         ctx.fillStyle = "white";
-        ctx.fillRect(camper.x + 10, camper.y + 20, camper.size - 40, camper.size - 47);
-        ctx.fillRect(camper.x + 30, camper.y + 20, camper.size - 40, camper.size - 47);
-        ctx.fillRect(camper.x + 17, camper.y + 35, camper.size - 36, camper.size - 48);
+        // draw eyes
+        var eyes = {
+            y: (camper.moving ? (camper.y + 19) : (camper.y + 20)),
+            // height: (camper.moving ? (camper.size - 45) : (camper.size - 47))
+            //y: (camper.y + 20),
+            height: (camper.size - 47)
+        };
+        ctx.fillRect(camper.x + 10, eyes.y, camper.size - 40, eyes.height);
+        ctx.fillRect(camper.x + 30, eyes.y, camper.size - 40, eyes.height);
+
+        // draw mouth
+        var mouth = {
+            x: (camper.moving ? (camper.x + 19) : (camper.x + 18)),
+            y: (camper.moving ? (camper.y + 32) : (camper.y + 35)),
+            width: (camper.moving ? (camper.size - 39) : (camper.size - 36)),
+            height: (camper.moving ? (camper.size - 39) : (camper.size - 45))
+        };
+        ctx.fillRect(mouth.x, mouth.y, mouth.width, mouth.height);
     }
 
     function showPrompt(message) {

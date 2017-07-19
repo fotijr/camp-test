@@ -1,18 +1,6 @@
 exports.config = {
     
     //
-    // =================
-    // Service Providers
-    // =================
-    // WebdriverIO supports Sauce Labs, Browserstack, and Testing Bot (other cloud providers
-    // should work too though). These services define specific user and key (or access key)
-    // values you need to put in here in order to connect to these services.
-    //
-    user: "FotiJr",
-    key: "7f2e3b7f-d3ef-4e7d-88e8-369e306d3e07",
-    
-    
-    //
     // ==================
     // Specify Test Files
     // ==================
@@ -22,7 +10,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './integration/**/*.js'
+        './integration/wdio.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -56,7 +44,7 @@ exports.config = {
         // 5 instances get started at a time.
         maxInstances: 5,
         //
-        browserName: 'firefox'
+        browserName: 'chrome'
     }],
     //
     // ===================
