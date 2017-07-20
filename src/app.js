@@ -13,7 +13,7 @@ export default function (canvas) {
     var activeCamper = campers[0];
 
     function keydown(e) {
-        let pixelsToMove = 55;
+        let pixelsToMove = (canvas.width * 0.05);
 
         if (e.keyCode === 88 && activeActivity) { // x
             return doActivity(activeActivity, activeCamper);
@@ -41,20 +41,28 @@ export default function (canvas) {
         camper.animationComplete = window.setTimeout(() => {
             camper.moving = false;
             render();
-        }, 400);
+        }, 250);
     }
 
     function drawCamper(camper) {
+        // draw hair
+        ctx.fillStyle = "#000";
+        ctx.fillRect(camper.x + 10, camper.y - 15, camper.size - 20, 10);
+        ctx.fillRect(camper.x + 2, camper.y - 10, camper.size - 4, 10);
+        ctx.fillRect(camper.x - 2, camper.y - 5, camper.size + 4, camper.size - 20);
+        ctx.fillRect(camper.x - 6, camper.y, camper.size + 12, 10);
+        ctx.fillRect(camper.x - 10, camper.y + 5, camper.size + 20, 10);
+        ctx.fillRect(camper.x - 6, camper.y + 10, camper.size + 12, 10);
+
+        // draw head
         ctx.fillStyle = camper.color;
         ctx.fillRect(camper.x, camper.y + 5, camper.size, camper.size - 10);
         ctx.fillRect(camper.x + 5, camper.y, camper.size - 10, camper.size);
 
-        ctx.fillStyle = "white";
         // draw eyes
+        ctx.fillStyle = "#fff";
         var eyes = {
             y: (camper.moving ? (camper.y + 19) : (camper.y + 20)),
-            // height: (camper.moving ? (camper.size - 45) : (camper.size - 47))
-            //y: (camper.y + 20),
             height: (camper.size - 47)
         };
         ctx.fillRect(camper.x + 10, eyes.y, camper.size - 40, eyes.height);
@@ -65,9 +73,20 @@ export default function (canvas) {
             x: (camper.moving ? (camper.x + 19) : (camper.x + 18)),
             y: (camper.moving ? (camper.y + 32) : (camper.y + 35)),
             width: (camper.moving ? (camper.size - 39) : (camper.size - 36)),
-            height: (camper.moving ? (camper.size - 39) : (camper.size - 45))
+            height: (camper.moving ? (camper.size - 45) : (camper.size - 47))
         };
         ctx.fillRect(mouth.x, mouth.y, mouth.width, mouth.height);
+
+        // draw irises
+        ctx.fillStyle = "green";
+        ctx.fillRect(camper.x + 14, eyes.y + 0.5, 4, 4);
+        ctx.fillRect(camper.x + 34, eyes.y + 0.5, 4, 4);
+
+        // draw earings
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(camper.x - 1.5, camper.y + 22, 3, 3);
+        ctx.fillRect(camper.x + camper.size - 1, camper.y + 22, 3, 3);
+
     }
 
     function showPrompt(message) {
@@ -238,7 +257,6 @@ export default function (canvas) {
         }
         canvasArtifacts.push(grassPatches);
     }
-
 
     function renderActivity(activity) {
         var activityDiv = document.createElement('div');

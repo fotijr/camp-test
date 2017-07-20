@@ -12,8 +12,15 @@ h1{
     text-align: center;
 }
 
+img{
+    position: absolute;
+    width: 33.3%;
+    top: 25%;
+    left: 33.3%;
+}
+
 div.activity{
-    border: rgb(165, 42, 42) 5px solid;
+    border: #9b6244 5px solid;
     box-shadow: 1px 0px 40px 8px rgba(165, 42, 42, 0.5);
     position: absolute;
     background-size:cover;
