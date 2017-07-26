@@ -13,7 +13,7 @@ script:
   - npm run e2e-ci --silent
   - codecov
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 addons:
   firefox: "latest"
   sauce_connect:
