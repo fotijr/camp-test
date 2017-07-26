@@ -254,8 +254,8 @@ export default function (canvas) {
     function generateMap() {
         // bland green grass background
         canvasArtifacts.push({
-            //color: "#71CE48",
-            color: "#fff",
+            color: "#71CE48",
+            //color: "#fff",
             blobs: [{
                 x: 0,
                 y: 0,

@@ -8,7 +8,6 @@ function doActivity(activity) {
     return activity.do(this);
 }
 
-
 export default function (x, y) {
     var nia = {
         name: "Nia",
@@ -16,9 +15,7 @@ export default function (x, y) {
         age: 14,
         addWaiver: addWaiver,
         doActivity: doActivity,
-        waivers: {
-            //zipline: true
-        },
+        waivers: {},
         x: x ? (x - (camperSize / 2)) : 0,
         y: y ? (y - (camperSize / 2)) : 0,
         size: camperSize,

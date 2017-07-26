@@ -9,8 +9,8 @@ before_script:
   - npm run start &
   - sleep 3
 script:
-  - npm run test-ci
-  - nightwatch --env ci
+  - npm run test-ci --silent
+  - npm run e2e-ci --silent
   - codecov
 addons:
   firefox: "latest"

@@ -12,7 +12,7 @@ module.exports = function (config) {
     preprocessors: {
       'src/*.js': ["webpack", "coverage"]
     },
-    reporters: ["progress", "coverage"],
+    reporters: ["progress", "coverage", "kjhtml"],
     webpackMiddleware: webpackConfig.devServer,
     //webpackMiddleware: {stats: "errors-only"},
 
