@@ -16,7 +16,7 @@ describe("The zipline", function () {
 
   it("allows riders under 16 with a waiver", function (done) {
     camper.age = 15;
-    camper.waivers = { zipline: false };
+    camper.waivers = { zipline: true };
 
     camper.doActivity(zipline)
       .then(done)

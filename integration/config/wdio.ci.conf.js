@@ -10,7 +10,7 @@ exports.config = {
     //
     user: "FotiJr",
     key: "7f2e3b7f-d3ef-4e7d-88e8-369e306d3e07",
-    sauceConnect: true,
+    sauceConnect: !process.env.TRAVIS_BUILD_NUMBER,
 
     //
     // ==================
