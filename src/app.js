@@ -54,6 +54,49 @@ export default function (canvas) {
         ctx.fillRect(camper.x - 10, camper.y + 5, camper.size + 20, 10);
         ctx.fillRect(camper.x - 6, camper.y + 10, camper.size + 12, 10);
 
+        // draw legs
+        var defaultLegHeight = 5;
+        var legs = {
+            y: camper.y + camper.size,
+            width: 5,
+            all: [
+                {
+                    x: camper.x + (camper.size / 2) - 5,
+                    height: defaultLegHeight
+                },
+                {
+                    x: camper.x + (camper.size / 2) + 5,
+                    height: defaultLegHeight
+                }
+            ]
+        };
+        if (camper.moving) {
+            var legIndex = Math.round(Math.random()); // randomly pick 0 or 1
+            legs.all[legIndex].height += 2;
+        }
+        legs.all.forEach(function (leg) {
+            ctx.fillRect(leg.x, legs.y, legs.width, leg.height);
+        });
+
+        // draw feet
+        var feet = {
+            width: 8,
+            height: 2
+        };
+        feet.all = [
+            {
+                x: legs.all[0].x - (feet.width - legs.width),
+                y: legs.y + legs.all[0].height
+            },
+            {
+                x: legs.all[1].x,
+                y: legs.y + legs.all[1].height
+            }
+        ];
+        feet.all.forEach(function (foot) {
+            ctx.fillRect(foot.x, foot.y, feet.width, feet.height);
+        });
+
         // draw head
         ctx.fillStyle = camper.color;
         ctx.fillRect(camper.x, camper.y + 5, camper.size, camper.size - 10);
@@ -86,7 +129,6 @@ export default function (canvas) {
         ctx.fillStyle = "yellow";
         ctx.fillRect(camper.x - 1.5, camper.y + 22, 3, 3);
         ctx.fillRect(camper.x + camper.size - 1, camper.y + 22, 3, 3);
-
     }
 
     function showPrompt(message) {
@@ -112,7 +154,7 @@ export default function (canvas) {
     }
 
     function doActivity(activity, camper) {
-        activity.do(camper)
+        camper.doActivity(activity)
             .then(msg => {
                 return { success: true, message: msg };
             })
@@ -212,7 +254,8 @@ export default function (canvas) {
     function generateMap() {
         // bland green grass background
         canvasArtifacts.push({
-            color: "#71CE48",
+            //color: "#71CE48",
+            color: "#fff",
             blobs: [{
                 x: 0,
                 y: 0,

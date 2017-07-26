@@ -10,7 +10,7 @@ exports.config = {
     //
     user: "FotiJr",
     key: "7f2e3b7f-d3ef-4e7d-88e8-369e306d3e07",
-
+    sauceConnect: true,
 
     //
     // ==================
@@ -22,7 +22,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './integration/wdio.js'
+        './integration/*.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -118,7 +118,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    // services: [],//
+    services: ['sauce'],
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -226,6 +226,7 @@ exports.config = {
      */
     afterTest: function (test) {
         browser.options.desiredCapabilities.name = test.fullName;
+        console.log(browser.options.desiredCapabilities);
         // test.passed
     },
     /**

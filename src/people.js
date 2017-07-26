@@ -4,12 +4,18 @@ function addWaiver(waiver) {
     this.waivers[waiver] = true;
 }
 
+function doActivity(activity) {
+    return activity.do(this);
+}
+
+
 export default function (x, y) {
     var nia = {
         name: "Nia",
         color: "#774938",
         age: 14,
         addWaiver: addWaiver,
+        doActivity: doActivity,
         waivers: {
             //zipline: true
         },

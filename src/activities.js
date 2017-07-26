@@ -24,7 +24,7 @@ export default function () {
             left: "10%",
             width: 300,
             height: 213,
-            "background-image": "url(/img/zipline.jpg)"
+            "background-image": "url(img/zipline.jpg)"
         },
         get boundaries() {
             return {
@@ -62,7 +62,7 @@ export default function () {
             right: "10%",
             width: 300,
             height: 213,
-            "background-image": "url(/img/pool.jpg)"
+            "background-image": "url(img/pool.jpg)"
         },
         action: "swim in the pool",
         do: function (person) {
@@ -87,7 +87,7 @@ export default function () {
             left: "10%",
             width: 300,
             height: 213,
-            "background-image": "url(/img/computer.jpg)"
+            "background-image": "url(img/computer.jpg)"
         },
         get boundaries() {
             return {
@@ -100,7 +100,7 @@ export default function () {
         action: "to check your email",
         do: function (person) {
             return new Promise((resolve, reject) => {
-                getResource("/api/waiver.json")
+                getResource("api/waiver.json")
                     .then(waiver => {
                         if (!waiver.signed) reject("I'm sorry, your parents sent the waiver but it wasn't signed ☹");
                         person.addWaiver("zipline");
