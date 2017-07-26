@@ -56,7 +56,9 @@ exports.config = {
         // 5 instances get started at a time.
         maxInstances: 5,
         //
-        browserName: 'chrome'
+        browserName: "chrome",
+        "tunnel-identifier": process.env.TRAVIS_JOB_NUMBER,
+        build: process.env.TRAVIS_BUILD_NUMBER
     }],
     //
     // ===================
@@ -226,8 +228,6 @@ exports.config = {
      */
     afterTest: function (test) {
         browser.options.desiredCapabilities.name = test.fullName;
-        console.log(browser.options.desiredCapabilities);
-        // test.passed
     },
     /**
      * Hook that gets executed after the suite has ended
