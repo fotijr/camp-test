@@ -12,6 +12,8 @@ script:
   - npm run test-ci --silent
   - npm run e2e-ci --silent
   - codecov
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 addons:
   firefox: "latest"
   sauce_connect:
