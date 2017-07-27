@@ -5,19 +5,41 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'src/*.spec.js'
+      'src/**/*.spec.js'
     ],
     exclude: [
     ],
     preprocessors: {
-      'src/*.js': ["webpack", "coverage"]
+      'src/*.js': ["webpack", "coverage", "sourcemap"]
     },
     reporters: ["progress", "coverage", "kjhtml"],
-    webpackMiddleware: webpackConfig.devServer,
-    //webpackMiddleware: {stats: "errors-only"},
+
+    webpackMiddleware: {
+      stats: {
+        noInfo: true,
+        colors: true,
+        warnings: true,
+        errors: true,
+        chunkModules: false,
+        timings: false,
+        assets: false,
+        version: false,
+        hash: false,
+        chunks: false,
+        modules: false,
+        reasons: false,
+        children: false,
+        source: false,
+        errorDetails: false,
+        publicPath: false
+      }
+    },
+
+    webpack: webpackConfig,
 
     coverageReporter: {
       reporters: [
+        // generates ./coverage/lcov.info
         { type: 'lcovonly' }
       ]
     },
@@ -25,10 +47,8 @@ module.exports = function (config) {
     // web server port
     port: 9876,
 
-
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG

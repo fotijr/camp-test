@@ -25,15 +25,22 @@ module.exports = {
                     {
                         loader: "jshint-loader",
                         options: {
+                            reporter: require('jshint-loader-reporter')("stylish"),
                             esversion: 6,
                             camelcase: true,
                             browser: true,
                             undef: true,
                             devel: true,
                             globals: {
+                                // no warnings for jasmine
+                                "jasmine": true,
                                 "describe": true, // prevent jshint warning for jasmine function names
                                 "it": true,
-                                "expect": true
+                                "expect": true,
+                                "beforeAll": true,
+                                "beforeEach": true,
+                                "afterEach": true,
+                                "spyOn": true
                             }
                         }
                     }
@@ -45,7 +52,7 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: './src/index.html' },
             { from: './src/main.css' },
-            { from: './src/api',to: 'api' },
+            { from: './src/api', to: 'api' },
             { from: './src/img', to: 'img' }
         ])
     ],
@@ -53,8 +60,8 @@ module.exports = {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         port: 9000,
-        stats: "errors-only"
+        //stats: "errors-only"
         //stats: webpackOutput
     },
-    devtool: "cheap-eval-source-map"
+    devtool: "inline-source-map"
 };

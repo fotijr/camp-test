@@ -2369,6 +2369,13 @@ jschardet@^1.4.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/jschardet/-/jschardet-1.5.0.tgz#a61f310306a5a71188e1b1acd08add3cfbb08b1e"
 
+jshint-loader-reporter@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/jshint-loader-reporter/-/jshint-loader-reporter-1.0.4.tgz#66e49bf605e52dc22bd3adcb06596d289c291839"
+  dependencies:
+    chalk "^1.1.1"
+    text-table "^0.2.0"
+
 jshint-loader@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/jshint-loader/-/jshint-loader-0.8.4.tgz#b43ee45d137769d5658940a11f8efd9a0edcd47b"
@@ -2486,6 +2493,12 @@ karma-phantomjs-launcher@^1.0.4:
   dependencies:
     lodash "^4.0.1"
     phantomjs-prebuilt "^2.1.7"
+
+karma-sourcemap-loader@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/karma-sourcemap-loader/-/karma-sourcemap-loader-0.3.7.tgz#91322c77f8f13d46fed062b042e1009d4c4505d8"
+  dependencies:
+    graceful-fs "^4.1.2"
 
 karma-webpack@^2.0.3:
   version "2.0.4"
@@ -4229,6 +4242,10 @@ tar@^2.2.1:
     block-stream "*"
     fstream "^1.0.2"
     inherits "2"
+
+text-table@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
 
 throttleit@^1.0.0:
   version "1.0.0"

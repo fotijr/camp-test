@@ -5,7 +5,7 @@ describe("Using the computer lab", function () {
 
   beforeEach(function () {
     jasmine.Ajax.install();
-    camper = zipline = require('./people.js').default().nia;
+    camper = require('./people.js').default().nia;
     computerLab = require('./activities.js').default().computerLab;
   });
 
@@ -37,7 +37,7 @@ describe("Using the computer lab", function () {
       camper.waivers = {};
 
       camper.doActivity(computerLab)
-        .then(() => { done.fail("Activity should have failed") })
+        .then(() => { done.fail("Activity should have failed"); })
         .catch(errorMsg => {
           expect(errorMsg).toContain("signed");
           done();
