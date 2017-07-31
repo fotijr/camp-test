@@ -46,6 +46,8 @@
   },
   "dependencies": {
     "codecov": "^2.2.0",
+    "global": "^4.3.2",
+    "jasmine": "^2.7.0",
     "karma-firefox-launcher": "^1.0.1"
   }
 }

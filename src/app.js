@@ -134,6 +134,7 @@ export default function (canvas) {
     function showPrompt(message) {
         var prompt = getPromptElement();
         if (prompt === null) return;
+        prompt.classList.remove("happy", "sad");
         prompt.innerHTML = message;
         prompt.classList.add("show");
         promptShown = true;
@@ -149,7 +150,7 @@ export default function (canvas) {
         activeActivity = null;
         var prompt = getPromptElement();
         if (prompt === null) return;
-        prompt.classList.remove("show", "happy", "sad");
+        prompt.classList.remove("show");
         promptShown = false;
     }
 
