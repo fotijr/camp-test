@@ -1,24 +1,21 @@
 const webpackConfig = require("./webpack.config");
-//webpackConfig.entry = {};
-
-var ciBuild = (!!process.env.TRAVIS_BUILD_NUMBER);
+const ciBuild = (!!process.env.TRAVIS_BUILD_NUMBER);
 
 module.exports = function (config) {
   config.set({
     basePath: "",
     frameworks: ["jasmine"],
     files: [
-      "src/**/*.js",
-      "test/spec/**/*.spec.js"
+      "dist/*.js",
+      "test/spec/*.spec.js"
     ],
     exclude: [
-       "src/index.js"
     ],
     preprocessors: {
       "src/*.js": ["webpack", "sourcemap"],
       "test/**/*.spec.js": ["webpack", "sourcemap"]      
     },
-    reporters: ciBuild ? ["dots", "coverage", "kjhtml"] : ["dots", "kjhtml"],
+    reporters: ciBuild ? ["dots", "coverage", "kjhtml"] : ["progress"],
 
     webpackMiddleware: {
         noInfo: true,
@@ -63,7 +60,6 @@ module.exports = function (config) {
     singleRun: false,
     concurrency: Infinity,
 
-    // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     //browsers: ["Chrome", "IE", "Firefox"],
     browsers: ["Chrome"]    

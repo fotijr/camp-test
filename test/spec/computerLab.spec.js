@@ -19,7 +19,6 @@ describe("Using the computer lab", function () {
 
     it("will call the waiver API and add waiver to camper", function (done) {
       spyOn(camper, "addWaiver");
-      expect(true).toBe(false);
 
       camper.doActivity(computerLab)
         .then(() => {

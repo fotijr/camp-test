@@ -321,4 +321,9 @@ export default function (canvas) {
     generateMap();
     render();
     showPrompt("Welcome to Camp Test! Use the arrow keys to move.");
+
+    return {
+        render,
+        generateMap
+    };
 }
