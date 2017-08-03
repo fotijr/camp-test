@@ -27,10 +27,7 @@ export default function (canvas) {
             activeCamper.y += pixelsToMove;
         } else if (e.keyCode === 37) { // left
             activeCamper.x -= pixelsToMove;
-        } else {
-            console.log("Key code:", e.keyCode);
-            return;
-        }
+        } else return;
         animateCamper(activeCamper);
         render(e.keyCode);
     }

@@ -1,13 +1,13 @@
+import people from "../../src/people.js";
+import activities from "../../src/activities.js";
+
 describe("The pool", function () {
   var camper, pool, mockTime;
 
-  beforeAll(function () {
-    mockTime = new Date();
-  });
-
   beforeEach(() => {
-    camper = require('./people.js').default().nia;
-    pool = require('./activities.js').default().pool;
+    camper = people().nia;
+    pool = activities().pool;
+    mockTime = new Date();
   });
 
   it("allows swimmers between 7am and 7pm", function (done) {

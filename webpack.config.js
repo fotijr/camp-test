@@ -2,11 +2,22 @@ var path = require('path');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpackOutput = {
-    hash: false,
-    version: false,
+    noInfo: true,
+    colors: true,
+    warnings: true,
+    errors: true,
+    chunkModules: false,
     timings: false,
     assets: false,
-    chunks: false
+    version: false,
+    hash: false,
+    chunks: false,
+    modules: false,
+    reasons: false,
+    children: false,
+    source: false,
+    errorDetails: false,
+    publicPath: false
 };
 
 module.exports = {
@@ -61,7 +72,7 @@ module.exports = {
         compress: true,
         port: 9000,
         //stats: "errors-only"
-        //stats: webpackOutput
+        stats: webpackOutput
     },
     devtool: "inline-source-map"
 };

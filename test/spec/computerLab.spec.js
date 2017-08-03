@@ -1,12 +1,14 @@
-require('jasmine-ajax');
+require("jasmine-ajax");
+import people from "../../src/people.js";
+import activities from "../../src/activities.js";
 
 describe("Using the computer lab", function () {
   var camper, computerLab;
 
   beforeEach(function () {
     jasmine.Ajax.install();
-    camper = require('./people.js').default().nia;
-    computerLab = require('./activities.js').default().computerLab;
+    camper = people().nia;
+    computerLab = activities().computerLab;
   });
 
   afterEach(function () {
@@ -17,6 +19,7 @@ describe("Using the computer lab", function () {
 
     it("will call the waiver API and add waiver to camper", function (done) {
       spyOn(camper, "addWaiver");
+      expect(true).toBe(false);
 
       camper.doActivity(computerLab)
         .then(() => {
@@ -29,7 +32,7 @@ describe("Using the computer lab", function () {
       jasmine.Ajax.requests.mostRecent().respondWith({
         "status": 200,
         "contentType": "application/json",
-        "responseText": '{"signed": true}'
+        "responseText": "{\"signed\": true}"
       });
     });
 
@@ -46,7 +49,7 @@ describe("Using the computer lab", function () {
       jasmine.Ajax.requests.mostRecent().respondWith({
         "status": 200,
         "contentType": "application/json",
-        "responseText": '{}'
+        "responseText": "{}"
       });
     });
   });

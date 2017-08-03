@@ -1,21 +1,26 @@
-const webpackConfig = require('./webpack.config');
+const webpackConfig = require("./webpack.config");
+//webpackConfig.entry = {};
+
+var ciBuild = (!!process.env.TRAVIS_BUILD_NUMBER);
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
-    frameworks: ['jasmine'],
+    basePath: "",
+    frameworks: ["jasmine"],
     files: [
-      'src/**/*.spec.js'
+      "src/**/*.js",
+      "test/spec/**/*.spec.js"
     ],
     exclude: [
+       "src/index.js"
     ],
     preprocessors: {
-      'src/*.js': ["webpack", "coverage", "sourcemap"]
+      "src/*.js": ["webpack", "sourcemap"],
+      "test/**/*.spec.js": ["webpack", "sourcemap"]      
     },
-    reporters: ["progress", "coverage", "kjhtml"],
+    reporters: ciBuild ? ["dots", "coverage", "kjhtml"] : ["dots", "kjhtml"],
 
     webpackMiddleware: {
-      stats: {
         noInfo: true,
         colors: true,
         warnings: true,
@@ -32,7 +37,6 @@ module.exports = function (config) {
         source: false,
         errorDetails: false,
         publicPath: false
-      }
     },
 
     webpack: webpackConfig,
@@ -40,37 +44,28 @@ module.exports = function (config) {
     coverageReporter: {
       reporters: [
         // generates ./coverage/lcov.info
-        { type: 'lcovonly' }
+        { type: "lcovonly" }
       ]
     },
 
-    // web server port
+    browserConsoleLogOptions: {
+      terminal: false
+    },
+
+    client:{
+      captureConsole: false
+    },
+
     port: 9876,
-
-    // enable / disable colors in the output (reporters and logs)
     colors: true,
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-
-    // enable / disable watching file and executing tests whenever any file changes
+    logLevel: config.LOG_ERROR,
     autoWatch: true,
-
+    singleRun: false,
+    concurrency: Infinity,
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    //browsers: ['Chrome', 'IE', "Firefox"],
-    browsers: ['Chrome'],
-
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity
+    //browsers: ["Chrome", "IE", "Firefox"],
+    browsers: ["Chrome"]    
   })
 }

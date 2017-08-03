@@ -1,14 +1,17 @@
+import people from "../../src/people.js";
+import activities from "../../src/activities.js";
+
 describe("The zipline", function () {
   var camper, zipline;
 
   beforeEach(() => {
-    camper = require('./people.js').default().nia;
-    zipline = require('./activities.js').default().zipline;
+    camper = people().nia;
+    zipline = activities().zipline;
   });
 
   it("allows riders who are at least 16 yrs old", function (done) {
     camper.age = 16;
-
+    
     camper.doActivity(zipline)
       .then(done)
       .catch(() => done.fail("Zipline Do function failed"));
