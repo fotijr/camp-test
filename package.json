@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "test": "karma start --single-run",
-    "test-ci": "karma start --single-run --browsers Firefox --reporters dots,coverage",
+    "test-ci": "karma start --no-browsers --single-run --browsers Firefox --reporters dots,coverage",
     "integration": "node ./src/integration/app.integration.js",
     "e2e": "wdio test/e2e/config/wdio.local.conf.js",
     "e2e-ci": "wdio test/e2e/config/wdio.ci.conf.js",
