@@ -32,6 +32,8 @@ describe("Using the computer lab", function () {
           done();
         })
         .catch(done.fail);
+
+      jasmine.Ajax.requests.mostRecent().respondWith(successfulResponse);
     });
 
     it("will call the waiver API and add waiver to camper", function (done) {
