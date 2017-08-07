@@ -14,4 +14,5 @@ A web app rendering in canvas to demonstrate client-side testing.
 3. Run `npm run start`.
 4. Navigate to http://localhost:9000/.
 
-View a web demo of the app: http://fotijr.com/camp-test 
+View a web demo of the app: https://fotijr.com/camp-test 
+Download the *Test Your JS* slides: https://fotijr.com/camp-test/TestYourJS.pptx

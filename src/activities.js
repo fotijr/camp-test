@@ -1,13 +1,4 @@
-function calculateActivitySize(appWidth, appHeight){
-    var activitySize  = {
-        width: 300,
-        height: 213
-    };
-
-    return activitySize;
-}
-
-export default function (appWidth, appHeight) {
+export default function () {
     function getResource(url) {
         return new Promise(function (resolve, reject) {
             let req = new XMLHttpRequest();
